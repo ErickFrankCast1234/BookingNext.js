@@ -5,6 +5,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/libs/mongo"; // Conexión a MongoDB
 import connectMongo from "@/libs/mongoose"; // Conexión a Mongoose
 import User from "@/models/User"; // Modelo de usuario
+import { NextResponse } from "next/server"; // Importa NextResponse para App Router
 
 // ⚙️ Configuración de NextAuth
 const authOptions = {
@@ -53,4 +54,15 @@ const authOptions = {
   },
 };
 
+// Handlers compatibles con App Router
+export const handlers = {
+  GET: async () => {
+    return NextResponse.json({ message: "GET handler funcionando" });
+  },
+  POST: async () => {
+    return NextResponse.json({ message: "POST handler funcionando" });
+  },
+};
+
+// Exporta la configuración de NextAuth
 export default NextAuth(authOptions);

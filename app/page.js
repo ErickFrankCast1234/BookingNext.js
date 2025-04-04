@@ -5,6 +5,7 @@ import BookingSearchForm from "../Components/BookingSearchForm";
 import Carousel from "../Components/Carousel";
 import WeekendOffersCarousel from "../Components/WeekendOffersCarousel";
 import Footer from "../Components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -42,9 +43,8 @@ export default function Home() {
           </button>
           <button
             className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold"
-            onClick={() => window.location.href = "/login"}
           >
-            Iniciar sesión
+            <Link href="/login">Iniciar sesión</Link>
           </button>
         </div>
       </div>
