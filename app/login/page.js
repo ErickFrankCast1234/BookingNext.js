@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -8,29 +9,17 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
-    console.log("📤 Enviando solicitud al endpoint /api/auth/send-login-email");
-  
-    try {
-      const response = await fetch("/api/auth/send-login-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-  
-      console.log("📥 Respuesta del servidor:", response);
-  
-      if (response.ok) {
-        setMessage("✅ Se ha enviado un enlace de inicio de sesión a tu correo.");
-      } else {
-        const errorData = await response.json();
-        setMessage(`❌ Error: ${errorData.error || "Inténtalo de nuevo."}`);
-      }
-    } catch (error) {
-      console.error("❌ Error al enviar la solicitud:", error);
-      setMessage("❌ Hubo un error al enviar el correo. Inténtalo de nuevo.");
+
+    // Usar signIn del proveedor 'resend'
+    const result = await signIn("resend", {
+      email,
+      redirect: false, // ⛔️ evita redirección automática al callbackUrl
+    });
+
+    if (result?.ok) {
+      setMessage("✅ Se ha enviado un enlace de inicio de sesión a tu correo.");
+    } else {
+      setMessage("❌ Hubo un error al enviar el enlace. Intenta nuevamente.");
     }
   };
 
