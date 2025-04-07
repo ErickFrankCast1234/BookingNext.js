@@ -8,28 +8,39 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    required: true, // ✅ Necesario para MongoDBAdapter
+    unique: true,
     trim: true,
     lowercase: true,
+  },
+  emailVerified: {
+    type: Date, // ✅ Necesario para marcar cuentas verificadas (Resend o Google)
+    default: null,
   },
   image: {
     type: String,
   },
-  // 🔐 Indica si el usuario tiene acceso a ciertas funciones o permisos
+
+  // 🔐 Permisos personalizados
   hasAccess: {
-    type: Boolean, // Valor verdadero o falso
-    default: false, // Por defecto, no tiene acceso
+    type: Boolean,
+    default: false,
   },
 
-  // 🆔 Identificador del cliente asociado al usuario (si aplica)
+  // 🆔 Cliente (si aplica)
   customerId: {
-    type: String, // Almacena un ID como cadena de texto
+    type: String,
   },
+
+  // Relaciones con tableros u otra entidad
   boards: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Board",
     },
   ],
+}, {
+  timestamps: true, // 🕒 Para createdAt y updatedAt
 });
 
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);
