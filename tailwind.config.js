@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -5,23 +6,16 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   safelist: [
-    "input",
-    "input-bordered",
-    "btn",
-    "btn-primary",
-    "dropdown",
-    "dropdown-content",
-    "rounded-box",
-    "shadow",
-    "label",
-    "text-black",
+    'input', 'input-bordered',
+    'btn', 'btn-sm', 'btn-primary',
+    'dropdown', 'dropdown-content',
+    'rounded-box', 'shadow', 'text-black'
   ],
   theme: {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
