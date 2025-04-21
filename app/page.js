@@ -24,7 +24,7 @@ export default function Home() {
       `}</style>
 
       {/* 🟦 CABECERA */}
-      <div className="navbar bg-blue-600 shadow-md px-6 w-full h-20 fixed top-0 left-0 z-50">
+      <div className="navbar bg-blue-600 shadow-md px-6 w-full h-20">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl text-white">
             <Image
@@ -80,7 +80,7 @@ export default function Home() {
 
 
       {/* 🔽 CONTENIDO PRINCIPAL */}
-      <main className="flex min-h-screen flex-col px-0 pb-24 pt-20 bg-gray-100">
+      <main className="flex min-h-screen flex-col px-0 pb-24 bg-gray-100">
 
 
         <BookingSearchForm />
@@ -95,8 +95,8 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               {[
-                { name: "Ciudad de México", image: "/CDMX.png", link: "/destinos/cdmx" },
-                { name: "Guadalajara", image: "/guadalajara.png", link: "/destinos/guadalajara" },
+                { name: "Ciudad de México", image: "/CDMX.png", link: "/destinos/CDMX" },
+                { name: "Guadalajara", image: "/guadalajara.png", link: "/destinos/Guadalajara" },
               ].map((destino, index) => (
                 <a
                   key={index}
@@ -110,6 +110,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
+
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[

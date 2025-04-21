@@ -2,51 +2,56 @@
 
 import { useRef } from "react";
 
+const formatoMXN = new Intl.NumberFormat("es-MX", {
+  style: "currency",
+  currency: "MXN",
+});
+
 const WeekendOffersCarousel = () => {
   const ofertas = [
     {
-      name: "La Quinta by Wyndham Puebla Palmas Angelopolis",
+      id: "680307cc06f61ea7a93af543", // ya estaba insertado
+      name: "La Quinta by Wyndham Puebla Palmas Angelópolis",
       image: "/la-quinta.png",
       location: "Puebla, México",
       rating: "8.6",
       reviews: "2,675 comentarios",
-      price: "COP 457,780",
-      oldPrice: "COP 544,980",
+      price: 1200,
+      oldPrice: 1500,
       nights: "2 noches",
-      link: "/ofertas/la-quinta", // Enlace a la página de la oferta
     },
     {
+      id: "68030cd406f61ea7a93af544", // Princess Mundo Imperial
       name: "Princess Mundo Imperial Riviera Diamante Acapulco",
       image: "/princess-mundo.png",
       location: "Acapulco, México",
       rating: "8.5",
       reviews: "1,627 comentarios",
-      price: "COP 1,436,460",
-      oldPrice: "COP 2,394,080",
+      price: 4200,
+      oldPrice: 5500,
       nights: "2 noches",
-      link: "/ofertas/princess-mundo", // Enlace a la página de la oferta
     },
     {
+      id: "68030cd406f61ea7a93af545", // Hotel Stella Maris
       name: "Hotel Stella Maris",
       image: "/stella-maris.png",
       location: "Ciudad de México, México",
       rating: "8.5",
       reviews: "414 comentarios",
-      price: "COP 489,740",
-      oldPrice: "COP 576,160",
+      price: 1500,
+      oldPrice: 1800,
       nights: "2 noches",
-      link: "/ofertas/stella-maris", // Enlace a la página de la oferta
     },
     {
+      id: "68030cd406f61ea7a93af546", // Grand Fiesta Americana
       name: "Grand Fiesta Americana Puebla Angelópolis",
       image: "/grand-fiesta.png",
       location: "Puebla, México",
       rating: "9.2",
       reviews: "633 comentarios",
-      price: "COP 1,022,840",
-      oldPrice: "COP 1,278,520",
+      price: 3200,
+      oldPrice: 4000,
       nights: "2 noches",
-      link: "/ofertas/grand-fiesta", // Enlace a la página de la oferta
     },
   ];
 
@@ -76,7 +81,6 @@ const WeekendOffersCarousel = () => {
         <h2 className="text-2xl font-bold mb-4 text-black">Ofertas para el fin de semana</h2>
         <p className="text-gray-500 mb-8">Ahorra en hospedaje para 4 abril - 6 abril</p>
         <div className="relative flex items-center">
-          {/* Botón Anterior */}
           <button
             onClick={handlePrev}
             className="absolute left-0 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black"
@@ -84,16 +88,12 @@ const WeekendOffersCarousel = () => {
             ◀
           </button>
 
-          {/* Carrusel */}
-          <div
-            ref={carouselRef}
-            className="flex overflow-x-hidden gap-4"
-          >
+          <div ref={carouselRef} className="flex overflow-x-hidden gap-4">
             {ofertas.map((oferta, index) => (
               <a
                 key={index}
-                href={oferta.link} // Enlace a la página de la oferta
-                className="flex-shrink-0 w-64 rounded-lg overflow-hidden shadow-lg bg-white"
+                href={`/hotel/${oferta.id}`}
+                className="flex-shrink-0 w-64 rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow"
               >
                 <img
                   src={oferta.image}
@@ -106,14 +106,13 @@ const WeekendOffersCarousel = () => {
                   <p className="text-blue-600 font-bold">{oferta.rating}</p>
                   <p className="text-gray-500">{oferta.reviews}</p>
                   <p className="text-gray-500">{oferta.nights}</p>
-                  <p className="text-red-500 line-through">{oferta.oldPrice}</p>
-                  <p className="text-green-600 font-bold">{oferta.price}</p>
+                  <p className="text-red-500 line-through">{formatoMXN.format(oferta.oldPrice)}</p>
+                  <p className="text-green-600 font-bold">{formatoMXN.format(oferta.price)}</p>
                 </div>
               </a>
             ))}
           </div>
 
-          {/* Botón Siguiente */}
           <button
             onClick={handleNext}
             className="absolute right-0 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black"

@@ -6,7 +6,6 @@ import { MapPinIcon } from "@heroicons/react/24/outline";
 
 export default function BookingSearchForm() {
   const router = useRouter();
-
   const [destination, setDestination] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -25,15 +24,20 @@ export default function BookingSearchForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const params = new URLSearchParams({
-      destino: destination,
-      fechaEntrada: checkIn,
-      fechaSalida: checkOut,
-      adultos: adults,
-      ninos: children,
-      habitaciones: rooms,
-    }).toString();
-    router.push(`/resultados?${params}`);
+
+    const defaultEntrada = "2025-04-15";
+    const defaultSalida = "2025-04-20";
+
+    const params = new URLSearchParams();
+
+    params.append("destino", destination || "");
+    params.append("fechaEntrada", checkIn || defaultEntrada);
+    params.append("fechaSalida", checkOut || defaultSalida);
+    params.append("adultos", adults);
+    params.append("ninos", children);
+    params.append("habitaciones", rooms);
+
+    router.push(`/resultados?${params.toString()}`);
   };
 
   return (
@@ -115,75 +119,20 @@ export default function BookingSearchForm() {
                 tabIndex={0}
                 className="dropdown-content z-[1] bg-white rounded-box shadow p-4 w-full"
               >
-                {/* Adultos */}
-                <div className="flex justify-between mb-2 text-black">
-                  <span>Adultos</span>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setAdults(Math.max(1, adults - 1))}
-                      className="btn btn-sm"
-                    >
-                      -
-                    </button>
-                    <span>{adults}</span>
-                    <button
-                      type="button"
-                      onClick={() => setAdults(adults + 1)}
-                      className="btn btn-sm"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
+                {[["Adultos", adults, setAdults, 1], ["Niños", children, setChildren, 0], ["Habitaciones", rooms, setRooms, 1]].map(
+                  ([label, value, setter, min], idx) => (
+                    <div key={idx} className="flex justify-between mb-2 text-black">
+                      <span>{label}</span>
+                      <div className="flex gap-2">
+                        <button type="button" onClick={() => setter(Math.max(min, value - 1))} className="btn btn-sm">-</button>
+                        <span>{value}</span>
+                        <button type="button" onClick={() => setter(value + 1)} className="btn btn-sm">+</button>
+                      </div>
+                    </div>
+                  )
+                )}
 
-                {/* Niños */}
-                <div className="flex justify-between mb-2 text-black">
-                  <span>Niños</span>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setChildren(Math.max(0, children - 1))}
-                      className="btn btn-sm"
-                    >
-                      -
-                    </button>
-                    <span>{children}</span>
-                    <button
-                      type="button"
-                      onClick={() => setChildren(children + 1)}
-                      className="btn btn-sm"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                {/* Habitaciones */}
-                <div className="flex justify-between mb-2 text-black">
-                  <span>Habitaciones</span>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setRooms(Math.max(1, rooms - 1))}
-                      className="btn btn-sm"
-                    >
-                      -
-                    </button>
-                    <span>{rooms}</span>
-                    <button
-                      type="button"
-                      onClick={() => setRooms(rooms + 1)}
-                      className="btn btn-sm"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                <button type="submit" className="btn btn-primary w-full mt-2">
-                  OK
-                </button>
+                <button type="submit" className="btn btn-primary w-full mt-2">OK</button>
               </div>
             </div>
 
