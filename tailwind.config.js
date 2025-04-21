@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -6,10 +7,22 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   safelist: [
-    'input', 'input-bordered',
-    'btn', 'btn-sm', 'btn-primary',
-    'dropdown', 'dropdown-content',
-    'rounded-box', 'shadow', 'text-black'
+    'input',
+    'input-bordered',
+    'btn',
+    'btn-primary',
+    'btn-sm',
+    'dropdown',
+    'dropdown-content',
+    'rounded-box',
+    'shadow',
+    'text-black',
+    'border',
+    'w-full',
+    'mt-10',
+    'p-4',
+    'rounded-lg',
+    'border-yellow-400'
   ],
   theme: {
     extend: {
@@ -24,3 +37,4 @@ module.exports = {
     themes: ["cupcake", "dark", "light"],
   },
 };
+
