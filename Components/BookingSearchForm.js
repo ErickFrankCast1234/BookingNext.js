@@ -25,7 +25,6 @@ export default function BookingSearchForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const defaultEntrada = "2025-04-15";
     const defaultSalida = "2025-04-20";
 
@@ -58,14 +57,14 @@ export default function BookingSearchForm() {
         </h1>
       </div>
 
-      <div className="absolute bottom-10 w-full flex justify-center px-4">
+      <div className="absolute bottom-10 w-full flex justify-center px-4 z-50">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-7xl bg-white p-4 rounded-lg shadow-lg border-2 border-yellow-400"
+          className="w-full max-w-7xl bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400 relative z-50"
         >
           <div className="grid grid-cols-1 md:grid-cols-5 gap-2 items-center">
 
-            {/* DESTINO */}
+            {/* Destino */}
             <div className="relative w-full">
               <input
                 type="text"
@@ -77,7 +76,7 @@ export default function BookingSearchForm() {
                 onBlur={() => setTimeout(() => setShowOptions(false), 200)}
               />
               {showOptions && (
-                <ul className="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-lg w-full mt-1">
+                <ul className="absolute top-full left-0 z-[9999] bg-white border border-gray-300 rounded-lg shadow-lg w-full mt-1">
                   {destinations.map((d, i) => (
                     <li
                       key={i}
@@ -96,7 +95,7 @@ export default function BookingSearchForm() {
               )}
             </div>
 
-            {/* FECHAS */}
+            {/* Fechas */}
             <input
               type="date"
               className="input input-bordered w-full text-black"
@@ -110,7 +109,7 @@ export default function BookingSearchForm() {
               onChange={(e) => setCheckOut(e.target.value)}
             />
 
-            {/* ADULTOS / NIÑOS / HABITACIONES */}
+            {/* Habitaciones y más */}
             <div className="relative w-full">
               <button
                 type="button"
@@ -120,7 +119,7 @@ export default function BookingSearchForm() {
                 {adults} adultos • {children} niños • {rooms} habitación
               </button>
               {showDropdown && (
-                <div className="absolute z-20 bg-white rounded-lg shadow-lg p-4 mt-2 w-full">
+                <div className="absolute top-full left-0 z-[9999] bg-white rounded-lg shadow-lg p-4 mt-2 w-full">
                   {[
                     ["Adultos", adults, setAdults, 1],
                     ["Niños", children, setChildren, 0],
@@ -158,7 +157,7 @@ export default function BookingSearchForm() {
               )}
             </div>
 
-            {/* BOTÓN BUSCAR */}
+            {/* Botón Buscar */}
             <button type="submit" className="btn btn-primary w-full">
               Buscar
             </button>
