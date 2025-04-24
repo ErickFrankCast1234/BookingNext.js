@@ -50,9 +50,15 @@ export default function BookingSearchForm() {
       }}
     >
       <div style={{ position: "absolute", top: "30%", width: "100%", textAlign: "center" }}>
-        <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", textShadow: "0 2px 5px rgba(0,0,0,0.5)" }}>
+        <h1 style={{
+          color: "white",
+          fontSize: "3rem", // 👈 antes era 2rem
+          fontWeight: "bold",
+          textShadow: "0 2px 5px rgba(0,0,0,0.5)"
+        }}>
           "Vive el sueño en una casa vacacional"
         </h1>
+
       </div>
 
       <div style={{ position: "absolute", bottom: "40px", width: "100%", display: "flex", justifyContent: "center", padding: "0 1rem" }}>
@@ -128,14 +134,14 @@ export default function BookingSearchForm() {
             type="date"
             value={checkIn}
             onChange={(e) => setCheckIn(e.target.value)}
-            style={{ flex: "1 1 16%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc",  color: "#000", backgroundColor: "#fff",}}
+            style={{ flex: "1 1 16%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc", color: "#000", backgroundColor: "#fff", }}
           />
 
           <input
             type="date"
             value={checkOut}
             onChange={(e) => setCheckOut(e.target.value)}
-            style={{ flex: "1 1 16%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc",  color: "#000", backgroundColor: "#fff",}}
+            style={{ flex: "1 1 16%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc", color: "#000", backgroundColor: "#fff", }}
           />
 
           {/* Guests */}
