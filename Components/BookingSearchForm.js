@@ -28,10 +28,11 @@ export default function BookingSearchForm() {
       destino: destination,
       fechaEntrada: checkIn || "2025-04-15",
       fechaSalida: checkOut || "2025-04-20",
-      adultos: adults,
-      ninos: children,
-      habitaciones: rooms,
+      "adultos": adults,
+      "ninos": children,
+      "habitaciones": rooms,
     });
+    
     router.push(`/resultados?${params.toString()}`);
   };
 
@@ -57,10 +58,9 @@ export default function BookingSearchForm() {
           onSubmit={handleSubmit}
           className="w-full max-w-6xl bg-white p-4 rounded-lg shadow-lg border-2 border-yellow-400"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
-
+          <div className="flex flex-wrap gap-2 items-center justify-between">
             {/* Destino */}
-            <div className="relative">
+            <div className="relative w-full sm:w-[18%]">
               <input
                 type="text"
                 placeholder="¿A dónde vas?"
@@ -71,7 +71,7 @@ export default function BookingSearchForm() {
                 onBlur={() => setTimeout(() => setShowDestinos(false), 100)}
               />
               {showDestinos && (
-                <ul className="absolute bg-white border rounded shadow z-10 w-full mt-1 text-black">
+                <ul className="absolute bg-white border rounded shadow z-10 w-full mt-1">
                   {destinos.map((d, i) => (
                     <li
                       key={i}
@@ -92,7 +92,7 @@ export default function BookingSearchForm() {
             {/* Fecha entrada */}
             <input
               type="date"
-              className="input input-bordered w-full text-black"
+              className="input input-bordered w-full sm:w-[18%] text-black"
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
             />
@@ -100,25 +100,27 @@ export default function BookingSearchForm() {
             {/* Fecha salida */}
             <input
               type="date"
-              className="input input-bordered w-full text-black"
+              className="input input-bordered w-full sm:w-[18%] text-black"
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
             />
 
-            {/* Huespedes */}
-            <div className="relative">
+            {/* Guests */}
+            {/* Guests */}
+            <div className="relative w-full sm:w-[22%]">
               <button
                 type="button"
-                className="btn w-full justify-between text-black"
+                className="btn w-full justify-between text-black" // Asegura el color negro aquí
                 onClick={() => setShowGuests(!showGuests)}
               >
                 {adults} adultos • {children} niños • {rooms} habitación
               </button>
+
               {showGuests && (
-                <div className="absolute bg-white border rounded shadow p-4 w-full mt-1 z-10 text-black">
+                <div className="absolute bg-white border rounded shadow p-4 w-full mt-1 z-10">
                   {[["Adultos", adults, setAdults, 1], ["Niños", children, setChildren, 0], ["Habitaciones", rooms, setRooms, 1]].map(
                     ([label, value, setter, min], i) => (
-                      <div key={i} className="flex justify-between items-center mb-2">
+                      <div key={i} className="flex justify-between items-center mb-2 text-black">
                         <span>{label}</span>
                         <div className="flex gap-2">
                           <button type="button" onClick={() => setter(Math.max(min, value - 1))}>-</button>
@@ -138,8 +140,9 @@ export default function BookingSearchForm() {
               )}
             </div>
 
-            {/* Buscar */}
-            <button type="submit" className="btn btn-primary w-full">
+
+            {/* Botón buscar */}
+            <button type="submit" className="btn btn-primary w-full sm:w-[18%]">
               Buscar
             </button>
           </div>
