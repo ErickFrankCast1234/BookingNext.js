@@ -81,7 +81,14 @@ export default function BookingSearchForm() {
               onChange={(e) => setDestination(e.target.value)}
               onFocus={() => setShowDestinos(true)}
               onBlur={() => setTimeout(() => setShowDestinos(false), 100)}
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc", borderRadius: "5px" }}
+              style={{
+                width: "100%",
+                padding: "0.5rem",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                color: "#000", // 👈 contenido del input
+                backgroundColor: "#fff", // por si acaso
+              }}
             />
             {showDestinos && (
               <ul style={{
@@ -105,6 +112,8 @@ export default function BookingSearchForm() {
                       padding: "0.5rem",
                       cursor: "pointer",
                       borderBottom: "1px solid #eee",
+                      color: "#000", // 👈 contenido del input
+                      backgroundColor: "#fff", // por si acaso
                     }}
                   >
                     {d}
@@ -119,14 +128,14 @@ export default function BookingSearchForm() {
             type="date"
             value={checkIn}
             onChange={(e) => setCheckIn(e.target.value)}
-            style={{ flex: "1 1 18%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc" }}
+            style={{ flex: "1 1 16%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc",  color: "#000", backgroundColor: "#fff",}}
           />
 
           <input
             type="date"
             value={checkOut}
             onChange={(e) => setCheckOut(e.target.value)}
-            style={{ flex: "1 1 18%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc" }}
+            style={{ flex: "1 1 16%", padding: "0.5rem", borderRadius: "5px", border: "1px solid #ccc",  color: "#000", backgroundColor: "#fff",}}
           />
 
           {/* Guests */}
@@ -134,7 +143,7 @@ export default function BookingSearchForm() {
             <button
               type="button"
               onClick={() => setShowGuests(!showGuests)}
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#f9f9f9", textAlign: "left" }}
+              style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#f9f9f9", textAlign: "left", color: "#333" }}
             >
               {adults} adultos • {children} niños • {rooms} habitación
             </button>
@@ -149,6 +158,7 @@ export default function BookingSearchForm() {
                 width: "100%",
                 marginTop: "4px",
                 zIndex: 10,
+                color: "#000", // 👈 esto fuerza texto negro en todo el bloque
               }}>
                 {[["Adultos", adults, setAdults, 1], ["Niños", children, setChildren, 0], ["Habitaciones", rooms, setRooms, 1]].map(
                   ([label, value, setter, min], i) => (
