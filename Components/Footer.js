@@ -2,15 +2,28 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-10">
-      <div className="container mx-auto max-w-screen-xl px-4">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-
-
+    <footer style={{ backgroundColor: "#f3f4f6", padding: "60px 20px" }}>
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+        }}
+      >
+        {/* Grid de columnas */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "40px",
+            color: "#4b5563", // texto gris
+          }}
+        >
           {/* Columna 1 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-black">Atención personal</h3>
-            <ul className="text-gray-600 space-y-2">
+            <h3 style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#000" }}>
+              Atención personal
+            </h3>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>Preguntas frecuentes sobre el coronavirus (COVID-19)</li>
               <li>Gestiona tus viajes</li>
               <li>Atención al cliente</li>
@@ -20,8 +33,10 @@ const Footer = () => {
 
           {/* Columna 2 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-black">Descubre</h3>
-            <ul className="text-gray-600 space-y-2">
+            <h3 style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#000" }}>
+              Descubre
+            </h3>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>Programa de lealtad Genius</li>
               <li>Ofertas de temporada y para las vacaciones</li>
               <li>Artículos de viajes</li>
@@ -36,8 +51,10 @@ const Footer = () => {
 
           {/* Columna 3 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-black">Términos y ajustes</h3>
-            <ul className="text-gray-600 space-y-2">
+            <h3 style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#000" }}>
+              Términos y ajustes
+            </h3>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>Privacidad y cookies</li>
               <li>Términos y condiciones</li>
               <li>Disputa de colaboradores</li>
@@ -48,8 +65,10 @@ const Footer = () => {
 
           {/* Columna 4 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-black">Colaboradores</h3>
-            <ul className="text-gray-600 space-y-2">
+            <h3 style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#000" }}>
+              Colaboradores
+            </h3>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>Acceder a la extranet</li>
               <li>Ayuda para colaboradores</li>
               <li>Registra tu propiedad</li>
@@ -59,8 +78,10 @@ const Footer = () => {
 
           {/* Columna 5 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-black">Acerca de</h3>
-            <ul className="text-gray-600 space-y-2">
+            <h3 style={{ fontSize: "1.125rem", fontWeight: "bold", marginBottom: "1rem", color: "#000" }}>
+              Acerca de
+            </h3>
+            <ul style={{ listStyle: "none", padding: 0 }}>
               <li>Sobre Booking.com</li>
               <li>Cómo trabajamos</li>
               <li>Sustentabilidad</li>
@@ -70,39 +91,30 @@ const Footer = () => {
               <li>Contacto corporativo</li>
             </ul>
           </div>
-
-
-
-
         </div>
-
-        <br></br>
-        <br></br>
 
         {/* Línea divisoria */}
-        <div className="border-t border-gray-300 my-8"></div>
+        <div style={{ borderTop: "1px solid #d1d5db", margin: "60px 0" }}></div>
 
-        {/* Información adicional */}
-        <div className="flex flex-col items-center text-gray-600 mt-8"> {/* Agregado mt-8 */}
-          <div className="flex items-center space-x-2 mb-4">
-            <span className="text-lg">🇲🇽</span>
+        {/* Info adicional */}
+        <div style={{ textAlign: "center", color: "#4b5563" }}>
+          <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "center", gap: "8px", alignItems: "center" }}>
+            <span style={{ fontSize: "1.125rem" }}>🇲🇽</span>
             <span>COP</span>
           </div>
-          <p className="text-sm text-center">
+          <p style={{ fontSize: "0.875rem", marginBottom: "20px" }}>
             Booking.com forma parte de Booking Holdings Inc., líder mundial en viajes online y servicios relacionados.
           </p>
+
+          {/* Logos */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap" }}>
+            <img src="/Roomio.png" alt="Booking.com" style={{ height: "24px" }} />
+            <img src="/priceline-logo.png" alt="Priceline" style={{ height: "24px" }} />
+            <img src="/kayak-logo.png" alt="Kayak" style={{ height: "24px" }} />
+            <img src="/agoda-logo.png" alt="Agoda" style={{ height: "24px" }} />
+            <img src="/opentable-logo.png" alt="OpenTable" style={{ height: "24px" }} />
+          </div>
         </div>
-
-        {/* Logos */}
-        <div className="flex justify-center items-center mt-4 space-x-4">
-          <img src="/Roomio.png" alt="Booking.com" className="h-6" />
-          <img src="/priceline-logo.png" alt="Priceline" className="h-6" />
-          <img src="/kayak-logo.png" alt="Kayak" className="h-6" />
-          <img src="/agoda-logo.png" alt="Agoda" className="h-6" />
-          <img src="/opentable-logo.png" alt="OpenTable" className="h-6" />
-        </div>
-
-
       </div>
     </footer>
   );
