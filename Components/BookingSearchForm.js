@@ -29,7 +29,6 @@ export default function BookingSearchForm() {
     const defaultSalida = "2025-04-20";
 
     const params = new URLSearchParams();
-
     params.append("destino", destination || "");
     params.append("fechaEntrada", checkIn || defaultEntrada);
     params.append("fechaSalida", checkOut || defaultSalida);
@@ -61,12 +60,12 @@ export default function BookingSearchForm() {
       <div className="absolute bottom-10 w-full flex justify-center px-4">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-7xl bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400"
+          className="w-full max-w-7xl bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400 overflow-x-auto"
         >
-          <div className="grid grid-cols-5 gap-2 items-center">
+          <div className="flex flex-wrap gap-2 items-center justify-between w-full">
 
             {/* Destino */}
-            <div className="relative w-full">
+            <div className="relative w-full" style={{ flex: "1 1 18%" }}>
               <input
                 type="text"
                 placeholder="¿A dónde vas?"
@@ -96,22 +95,26 @@ export default function BookingSearchForm() {
               )}
             </div>
 
-            {/* Fechas */}
+            {/* Fecha entrada */}
             <input
               type="date"
               className="input input-bordered w-full text-black"
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
+              style={{ flex: "1 1 18%" }}
             />
+
+            {/* Fecha salida */}
             <input
               type="date"
               className="input input-bordered w-full text-black"
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
+              style={{ flex: "1 1 18%" }}
             />
 
             {/* Adultos/Niños/Habitaciones */}
-            <div className="dropdown w-full">
+            <div className="dropdown w-full" style={{ flex: "1 1 20%" }}>
               <label tabIndex={0} className="btn w-full justify-between">
                 {adults} adultos • {children} niños • {rooms} habitación
               </label>
@@ -136,7 +139,11 @@ export default function BookingSearchForm() {
             </div>
 
             {/* Botón principal */}
-            <button type="submit" className="btn btn-primary w-full">
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              style={{ flex: "1 1 18%" }}
+            >
               Buscar
             </button>
           </div>
