@@ -58,11 +58,10 @@ export default function BookingSearchForm() {
         </h1>
       </div>
 
-      <div className="absolute bottom-10 w-full flex justify-center">
+      <div className="absolute bottom-10 w-full flex justify-center px-4">
         <form
           onSubmit={handleSubmit}
-          className="w-full bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400"
-          style={{ maxWidth: "90rem" }}
+          className="w-full max-w-7xl bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400"
         >
           <div className="grid grid-cols-1 md:grid-cols-5 gap-2 items-center">
             {/* Destino */}
@@ -131,7 +130,6 @@ export default function BookingSearchForm() {
                     </div>
                   )
                 )}
-
                 <button type="submit" className="btn btn-primary w-full mt-2">OK</button>
               </div>
             </div>
