@@ -63,7 +63,8 @@ export default function BookingSearchForm() {
           onSubmit={handleSubmit}
           className="w-full max-w-7xl bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400"
         >
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-2 items-center">
+          <div className="grid grid-cols-5 gap-2 items-center">
+
             {/* Destino */}
             <div className="relative w-full">
               <input
