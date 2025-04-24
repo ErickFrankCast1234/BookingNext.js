@@ -1,40 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 // tailwind.config.js
+// tailwind.config.js
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
   ],
   safelist: [
+    'grid',
+    'grid-cols-5',
+    'items-center',
+    'gap-2',
+    'w-full',
+    'text-black',
     'input',
     'input-bordered',
     'btn',
     'btn-primary',
-    'btn-sm',
+    'rounded-lg',
+    'border-yellow-400',
+    'shadow-lg',
     'dropdown',
     'dropdown-content',
     'rounded-box',
-    'shadow',
-    'text-black',
-    'border',
-    'w-full',
-    'mt-10',
-    'p-4',
-    'rounded-lg',
-    'border-yellow-400'
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-    },
+    extend: {},
   },
   plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["cupcake", "dark", "light"],
-  },
 };
 
