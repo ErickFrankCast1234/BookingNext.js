@@ -13,6 +13,7 @@ export default function BookingSearchForm() {
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
   const [showOptions, setShowOptions] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const destinations = [
     "Acapulco, México",
@@ -29,7 +30,6 @@ export default function BookingSearchForm() {
     const defaultSalida = "2025-04-20";
 
     const params = new URLSearchParams();
-
     params.append("destino", destination || "");
     params.append("fechaEntrada", checkIn || defaultEntrada);
     params.append("fechaSalida", checkOut || defaultSalida);
@@ -54,15 +54,14 @@ export default function BookingSearchForm() {
     >
       <div className="absolute top-1/3 w-full text-center">
         <h1 className="text-white text-4xl md:text-6xl font-bold drop-shadow-lg">
-          &quot;Vive el sueño en una casa vacacional&quot;
+          "Vive el sueño en una casa vacacional"
         </h1>
       </div>
 
-      <div className="absolute bottom-10 w-full flex justify-center">
+      <div className="absolute bottom-10 w-full flex justify-center px-4">
         <form
           onSubmit={handleSubmit}
-          className="w-full bg-white mt-10 p-4 rounded-lg shadow-lg border-2 border-yellow-400"
-          style={{ maxWidth: "90rem" }}
+          className="w-full max-w-7xl bg-white p-4 rounded-lg shadow-lg border-2 border-yellow-400"
         >
           <div className="grid grid-cols-1 md:grid-cols-5 gap-2 items-center">
             {/* Destino */}
@@ -77,7 +76,7 @@ export default function BookingSearchForm() {
                 onBlur={() => setTimeout(() => setShowOptions(false), 200)}
               />
               {showOptions && (
-                <ul className="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-lg w-full mt-1">
+                <ul className="absolute z-50 bg-white border border-gray-300 rounded-lg shadow-lg w-full mt-1 max-h-60 overflow-y-auto">
                   {destinations.map((d, i) => (
                     <li
                       key={i}
@@ -111,29 +110,49 @@ export default function BookingSearchForm() {
             />
 
             {/* Adultos/Niños/Habitaciones */}
-            <div className="dropdown w-full">
-              <label tabIndex={0} className="btn w-full justify-between">
-                {adults} adultos • {children} niños • {rooms} habitación
-              </label>
-              <div
-                tabIndex={0}
-                className="dropdown-content z-[1] bg-white rounded-box shadow p-4 w-full"
+            <div className="relative w-full">
+              <button
+                type="button"
+                onClick={() => setShowDropdown(!showDropdown)}
+                className="btn w-full justify-between"
               >
-                {[["Adultos", adults, setAdults, 1], ["Niños", children, setChildren, 0], ["Habitaciones", rooms, setRooms, 1]].map(
-                  ([label, value, setter, min], idx) => (
-                    <div key={idx} className="flex justify-between mb-2 text-black">
-                      <span>{label}</span>
-                      <div className="flex gap-2">
-                        <button type="button" onClick={() => setter(Math.max(min, value - 1))} className="btn btn-sm">-</button>
-                        <span>{value}</span>
-                        <button type="button" onClick={() => setter(value + 1)} className="btn btn-sm">+</button>
+                {adults} adultos • {children} niños • {rooms} habitación
+              </button>
+              {showDropdown && (
+                <div className="absolute z-50 bg-white rounded-box shadow p-4 w-full mt-1">
+                  {[["Adultos", adults, setAdults, 1], ["Niños", children, setChildren, 0], ["Habitaciones", rooms, setRooms, 1]].map(
+                    ([label, value, setter, min], idx) => (
+                      <div key={idx} className="flex justify-between mb-2 text-black">
+                        <span>{label}</span>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setter(Math.max(min, value - 1))}
+                            className="btn btn-sm"
+                          >
+                            -
+                          </button>
+                          <span>{value}</span>
+                          <button
+                            type="button"
+                            onClick={() => setter(value + 1)}
+                            className="btn btn-sm"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  )
-                )}
-
-                <button type="submit" className="btn btn-primary w-full mt-2">OK</button>
-              </div>
+                    )
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setShowDropdown(false)}
+                    className="btn btn-primary w-full mt-2"
+                  >
+                    OK
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Botón principal */}
