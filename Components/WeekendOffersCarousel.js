@@ -10,7 +10,7 @@ const formatoMXN = new Intl.NumberFormat("es-MX", {
 const WeekendOffersCarousel = () => {
   const ofertas = [
     {
-      id: "680307cc06f61ea7a93af543", // ya estaba insertado
+      id: "680307cc06f61ea7a93af543",
       name: "La Quinta by Wyndham Puebla Palmas Angelópolis",
       image: "/la-quinta.png",
       location: "Puebla, México",
@@ -21,7 +21,7 @@ const WeekendOffersCarousel = () => {
       nights: "2 noches",
     },
     {
-      id: "68030cd406f61ea7a93af544", // Princess Mundo Imperial
+      id: "68030cd406f61ea7a93af544",
       name: "Princess Mundo Imperial Riviera Diamante Acapulco",
       image: "/princess-mundo.png",
       location: "Acapulco, México",
@@ -32,7 +32,7 @@ const WeekendOffersCarousel = () => {
       nights: "2 noches",
     },
     {
-      id: "68030cd406f61ea7a93af545", // Hotel Stella Maris
+      id: "68030cd406f61ea7a93af545",
       name: "Hotel Stella Maris",
       image: "/stella-maris.png",
       location: "Ciudad de México, México",
@@ -43,7 +43,7 @@ const WeekendOffersCarousel = () => {
       nights: "2 noches",
     },
     {
-      id: "68030cd406f61ea7a93af546", // Grand Fiesta Americana
+      id: "68030cd406f61ea7a93af546",
       name: "Grand Fiesta Americana Puebla Angelópolis",
       image: "/grand-fiesta.png",
       location: "Puebla, México",
@@ -76,19 +76,23 @@ const WeekendOffersCarousel = () => {
   };
 
   return (
-    <div className="p-10 bg-white">
-      <div className="container mx-auto max-w-screen-[800px] px-48">
-        <h2 className="text-2xl font-bold mb-4 text-black">Ofertas para el fin de semana</h2>
-        <p className="text-gray-500 mb-8">Ahorra en hospedaje para 4 abril - 6 abril</p>
-        <div className="relative flex items-center">
+    <div className="py-10 bg-white">
+      <div className="max-w-[1200px] mx-auto px-4">
+        <h2 className="text-2xl font-bold mb-2 text-black">Ofertas para el fin de semana</h2>
+        <p className="text-gray-500 mb-6">Ahorra en hospedaje para 4 abril - 6 abril</p>
+
+        <div className="relative">
           <button
             onClick={handlePrev}
-            className="absolute left-0 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black"
+            className="absolute left-[-16px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
           >
             ◀
           </button>
 
-          <div ref={carouselRef} className="flex overflow-x-hidden gap-4">
+          <div
+            ref={carouselRef}
+            className="flex gap-4 overflow-x-auto scroll-smooth"
+          >
             {ofertas.map((oferta, index) => (
               <a
                 key={index}
@@ -115,7 +119,7 @@ const WeekendOffersCarousel = () => {
 
           <button
             onClick={handleNext}
-            className="absolute right-0 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black"
+            className="absolute right-[-16px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
           >
             ▶
           </button>
