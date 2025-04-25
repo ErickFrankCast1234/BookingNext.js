@@ -32,7 +32,7 @@ const Carousel = () => {
 
   const scrollToIndex = (index) => {
     if (carouselRef.current) {
-      const cardWidth = carouselRef.current.offsetWidth / 3; // ajusta si cambias layout
+      const cardWidth = carouselRef.current.offsetWidth / 3;
       carouselRef.current.scrollTo({
         left: cardWidth * index,
         behavior: "smooth",
@@ -46,11 +46,11 @@ const Carousel = () => {
 
   return (
     <div style={{ padding: "40px", backgroundColor: "#fff" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "8px" }}>
+      <div style={{ maxWidth: "1060px", margin: "0 auto" }}>
+        <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "8px", color: "#000" }}>
           Un planificador de viajes fácil y rápido
         </h2>
-        <p style={{ color: "#6b7280", marginBottom: "24px" }}>
+        <p style={{ color: "#444", marginBottom: "24px" }}>
           Escoge un estilo y encuentra los mejores destinos en México
         </p>
 
@@ -107,8 +107,10 @@ const Carousel = () => {
                   style={{ width: "100%", height: "140px", objectFit: "cover" }}
                 />
                 <div style={{ padding: "12px" }}>
-                  <h3 style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "4px" }}>{destino.name}</h3>
-                  <p style={{ color: "#6b7280", fontSize: "14px" }}>{destino.distance}</p>
+                  <h3 style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "4px", color: "#000" }}>
+                    {destino.name}
+                  </h3>
+                  <p style={{ color: "#000", fontSize: "14px" }}>{destino.distance}</p>
                 </div>
               </div>
             ))}
