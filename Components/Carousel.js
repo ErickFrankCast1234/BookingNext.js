@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 const Carousel = () => {
   const router = useRouter();
-  const carouselRef = useRef(null);
 
   const destinos = [
     { name: "CDMX", image: "/CDMX.png", distance: "a 86 km", link: "/destinos/CDMX" },
@@ -16,44 +15,100 @@ const Carousel = () => {
     { name: "Oaxaca de Juárez", image: "/oaxaca.png", distance: "a 317 km", link: "/destinos/oaxaca" },
   ];
 
-  const handleScroll = (direction) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  const handleNext = () => {
+    const newIndex = (currentIndex + 1) % destinos.length;
+    setCurrentIndex(newIndex);
+    scrollToIndex(newIndex);
+  };
+
+  const handlePrev = () => {
+    const newIndex = currentIndex === 0 ? destinos.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+    scrollToIndex(newIndex);
+  };
+
+  const scrollToIndex = (index) => {
     if (carouselRef.current) {
-      const container = carouselRef.current;
-      const scrollAmount = 300; // ajusta si es necesario
-      container.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+      const cardWidth = carouselRef.current.offsetWidth / 3; // ajusta si cambias layout
+      carouselRef.current.scrollTo({
+        left: cardWidth * index,
+        behavior: "smooth",
+      });
     }
   };
 
-  return (
-    <section className="px-6 py-10 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-2 text-black">Un planificador de viajes fácil y rápido</h2>
-        <p className="text-gray-500 mb-6">Escoge un estilo y encuentra los mejores destinos en México</p>
+  const handleClick = (link) => {
+    router.push(link);
+  };
 
-        <div className="relative">
+  return (
+    <div style={{ padding: "40px", backgroundColor: "#fff" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "8px" }}>
+          Un planificador de viajes fácil y rápido
+        </h2>
+        <p style={{ color: "#6b7280", marginBottom: "24px" }}>
+          Escoge un estilo y encuentra los mejores destinos en México
+        </p>
+
+        <div style={{ position: "relative" }}>
           {/* Botón izquierdo */}
           <button
-            onClick={() => handleScroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white border border-gray-300 rounded-full p-2 z-10 shadow hover:bg-gray-100"
+            onClick={handlePrev}
+            style={{
+              position: "absolute",
+              left: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+              color: "#fff",
+              border: "none",
+              borderRadius: "50%",
+              width: "32px",
+              height: "32px",
+              cursor: "pointer",
+              zIndex: 10,
+            }}
           >
-            ◀
+            &#9664;
           </button>
 
           {/* Carrusel */}
           <div
             ref={carouselRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-8 scrollbar-hide"
+            style={{
+              display: "flex",
+              gap: "16px",
+              overflowX: "auto",
+              scrollBehavior: "smooth",
+              padding: "0 40px",
+            }}
           >
             {destinos.map((destino, index) => (
               <div
                 key={index}
-                onClick={() => router.push(destino.link)}
-                className="min-w-[16rem] flex-shrink-0 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg cursor-pointer snap-start transition"
+                onClick={() => handleClick(destino.link)}
+                style={{
+                  flex: "0 0 auto",
+                  width: "220px",
+                  borderRadius: "10px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  cursor: "pointer",
+                  backgroundColor: "#fff",
+                  overflow: "hidden",
+                }}
               >
-                <img src={destino.image} alt={destino.name} className="w-full h-40 object-cover" />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-black">{destino.name}</h3>
-                  <p className="text-gray-500">{destino.distance}</p>
+                <img
+                  src={destino.image}
+                  alt={destino.name}
+                  style={{ width: "100%", height: "140px", objectFit: "cover" }}
+                />
+                <div style={{ padding: "12px" }}>
+                  <h3 style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "4px" }}>{destino.name}</h3>
+                  <p style={{ color: "#6b7280", fontSize: "14px" }}>{destino.distance}</p>
                 </div>
               </div>
             ))}
@@ -61,14 +116,27 @@ const Carousel = () => {
 
           {/* Botón derecho */}
           <button
-            onClick={() => handleScroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white border border-gray-300 rounded-full p-2 z-10 shadow hover:bg-gray-100"
+            onClick={handleNext}
+            style={{
+              position: "absolute",
+              right: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+              color: "#fff",
+              border: "none",
+              borderRadius: "50%",
+              width: "32px",
+              height: "32px",
+              cursor: "pointer",
+              zIndex: 10,
+            }}
           >
-            ▶
+            &#9654;
           </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
