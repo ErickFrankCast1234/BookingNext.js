@@ -60,7 +60,7 @@ const WeekendOffersCarousel = () => {
   const handleNext = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: carouselRef.current.offsetWidth,
+        left: 280, // ancho estimado de card + gap
         behavior: "smooth",
       });
     }
@@ -69,7 +69,7 @@ const WeekendOffersCarousel = () => {
   const handlePrev = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -carouselRef.current.offsetWidth,
+        left: -280,
         behavior: "smooth",
       });
     }
@@ -82,47 +82,52 @@ const WeekendOffersCarousel = () => {
         <p className="text-gray-500 mb-6">Ahorra en hospedaje para 4 abril - 6 abril</p>
 
         <div className="relative">
-          <button
-            onClick={handlePrev}
-            className="absolute left-[-16px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
-          >
-            ◀
-          </button>
+          {/* Carrusel con flechas internas */}
+          <div className="overflow-hidden relative">
+            <div
+              ref={carouselRef}
+              className="flex gap-4 overflow-x-auto scroll-smooth pb-2"
+            >
+              {ofertas.map((oferta, index) => (
+                <a
+                  key={index}
+                  href={`/hotel/${oferta.id}`}
+                  className="flex-shrink-0 w-64 rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow"
+                >
+                  <img
+                    src={oferta.image}
+                    alt={oferta.name}
+                    className="w-full h-40 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-black">{oferta.name}</h3>
+                    <p className="text-gray-500">{oferta.location}</p>
+                    <p className="text-blue-600 font-bold">{oferta.rating}</p>
+                    <p className="text-gray-500">{oferta.reviews}</p>
+                    <p className="text-gray-500">{oferta.nights}</p>
+                    <p className="text-red-500 line-through">{formatoMXN.format(oferta.oldPrice)}</p>
+                    <p className="text-green-600 font-bold">{formatoMXN.format(oferta.price)}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
 
-          <div
-            ref={carouselRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth"
-          >
-            {ofertas.map((oferta, index) => (
-              <a
-                key={index}
-                href={`/hotel/${oferta.id}`}
-                className="flex-shrink-0 w-64 rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow"
-              >
-                <img
-                  src={oferta.image}
-                  alt={oferta.name}
-                  className="w-full h-40 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-black">{oferta.name}</h3>
-                  <p className="text-gray-500">{oferta.location}</p>
-                  <p className="text-blue-600 font-bold">{oferta.rating}</p>
-                  <p className="text-gray-500">{oferta.reviews}</p>
-                  <p className="text-gray-500">{oferta.nights}</p>
-                  <p className="text-red-500 line-through">{formatoMXN.format(oferta.oldPrice)}</p>
-                  <p className="text-green-600 font-bold">{formatoMXN.format(oferta.price)}</p>
-                </div>
-              </a>
-            ))}
+            {/* Flecha Izquierda */}
+            <button
+              onClick={handlePrev}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
+            >
+              ◀
+            </button>
+
+            {/* Flecha Derecha */}
+            <button
+              onClick={handleNext}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
+            >
+              ▶
+            </button>
           </div>
-
-          <button
-            onClick={handleNext}
-            className="absolute right-[-16px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
-          >
-            ▶
-          </button>
         </div>
       </div>
     </div>
