@@ -77,7 +77,8 @@ const WeekendOffersCarousel = () => {
 
   return (
     <div className="py-10 bg-white">
-      <div className="max-w-[1200px] mx-auto px-4">
+      <div style={{ maxWidth: "1060px", margin: "0 auto", paddingLeft: "40px", paddingRight: "40px" }}>
+
         <h2 className="text-2xl font-bold mb-2 text-black">Ofertas para el fin de semana</h2>
         <p className="text-gray-500 mb-6">Ahorra en hospedaje para 4 abril - 6 abril</p>
 
