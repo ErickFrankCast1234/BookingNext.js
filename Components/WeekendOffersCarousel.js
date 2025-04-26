@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 const formatoMXN = new Intl.NumberFormat("es-MX", {
@@ -8,6 +9,9 @@ const formatoMXN = new Intl.NumberFormat("es-MX", {
 });
 
 const WeekendOffersCarousel = () => {
+  const router = useRouter();
+  const carouselRef = useRef(null);
+
   const ofertas = [
     {
       id: "680307cc06f61ea7a93af543",
@@ -55,12 +59,10 @@ const WeekendOffersCarousel = () => {
     },
   ];
 
-  const carouselRef = useRef(null);
-
   const handleNext = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: 300, // deslizar 300px a la derecha
+        left: 300,
         behavior: "smooth",
       });
     }
@@ -69,10 +71,14 @@ const WeekendOffersCarousel = () => {
   const handlePrev = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -300, // deslizar 300px a la izquierda
+        left: -300,
         behavior: "smooth",
       });
     }
+  };
+
+  const handleCardClick = (id) => {
+    router.push(`/hotel/${id}`);
   };
 
   return (
@@ -121,10 +127,11 @@ const WeekendOffersCarousel = () => {
             {ofertas.map((oferta, index) => (
               <div
                 key={index}
+                onClick={() => handleCardClick(oferta.id)}
                 style={{
                   flex: "0 0 auto",
-                  width: "260px", // ahora más ancha
-                  minWidth: "260px", // forzamos ancho mínimo
+                  width: "260px",
+                  minWidth: "260px",
                   borderRadius: "10px",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                   cursor: "pointer",
