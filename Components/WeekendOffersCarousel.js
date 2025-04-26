@@ -60,7 +60,7 @@ const WeekendOffersCarousel = () => {
   const handleNext = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: 280, // ancho estimado de card + gap
+        left: 280,
         behavior: "smooth",
       });
     }
@@ -78,12 +78,10 @@ const WeekendOffersCarousel = () => {
   return (
     <div className="py-10 bg-white">
       <div style={{ maxWidth: "1060px", margin: "0 auto", paddingLeft: "40px", paddingRight: "40px" }}>
-
         <h2 className="text-2xl font-bold mb-2 text-black">Ofertas para el fin de semana</h2>
         <p className="text-gray-500 mb-6">Ahorra en hospedaje para 4 abril - 6 abril</p>
 
         <div className="relative">
-          {/* Carrusel con flechas internas */}
           <div className="overflow-hidden relative">
             <div
               ref={carouselRef}
@@ -118,8 +116,8 @@ const WeekendOffersCarousel = () => {
               onClick={handlePrev}
               className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
@@ -128,8 +126,8 @@ const WeekendOffersCarousel = () => {
               onClick={handleNext}
               className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 text-black z-10"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
               </svg>
             </button>
 
