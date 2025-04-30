@@ -156,7 +156,8 @@ export default function Home() {
 
         {/* DESTINOS DE MODA */}
         <div className="p-10 bg-white">
-        <div className="container mx-auto max-w-screen-md px-4 sm:px-6 md:px-10 lg:px-20 xl:px-48 destinos-container">
+        <div className="container mx-auto max-w-8xl px-4 sm:px-6 md:px-10 lg:px-20 xl:px-48 destinos-container">
+
             <h2 className="text-2xl font-bold mb-4 text-black">Destinos de moda</h2>
             <p className="text-gray-500 mb-8">Opciones más populares para quienes viajen desde México</p>
 
