@@ -21,6 +21,73 @@ export default function Home() {
           box-sizing: border-box;
           overflow-x: hidden;
         }
+
+        @media (max-width: 400px) {
+        .search-form-wrapper {
+        padding: 1rem !important;
+        border-radius: 0 !important;
+        flex-direction: column !important;
+        }
+
+       .search-form-wrapper .grid {
+        display: flex;
+       flex-direction: column;
+       gap: 0.5rem;
+       }
+
+
+       .search-form-wrapper input,
+       .search-form-wrapper button,
+       .search-form-wrapper label {
+         width: 100% !important;
+         margin-bottom: 0.5rem;
+       }
+
+      .search-form-wrapper .dropdown-content {
+       position: static !important;
+       box-shadow: none !important;
+       border: 1px solid #ccc;
+      }
+
+      .search-form-wrapper .dropdown-content .btn {
+        width: 100%;
+      }
+     }
+
+@media (max-width: 400px) {
+  .destinos-container {
+    padding: 1rem !important;
+  }
+
+  .destinos-container h2 {
+    font-size: 1.25rem !important;
+    text-align: center;
+  }
+
+  .destinos-container p {
+    font-size: 0.875rem !important;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .destinos-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1rem !important;
+  }
+
+  .destinos-grid a {
+    height: auto !important;
+  }
+
+  .destinos-grid img {
+    height: 12rem !important;
+    object-fit: cover;
+  }
+}
+
+
+
       `}</style>
 
       {/* 🟦 CABECERA */}
@@ -89,7 +156,7 @@ export default function Home() {
 
         {/* DESTINOS DE MODA */}
         <div className="p-10 bg-white">
-          <div className="container mx-auto max-w-screen-[800px] px-48">
+        <div className="container mx-auto max-w-screen-md px-4 sm:px-6 md:px-10 lg:px-20 xl:px-48 destinos-container">
             <h2 className="text-2xl font-bold mb-4 text-black">Destinos de moda</h2>
             <p className="text-gray-500 mb-8">Opciones más populares para quienes viajen desde México</p>
 
