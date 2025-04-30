@@ -7,10 +7,17 @@ import Carousel from "../Components/Carousel";
 import WeekendOffersCarousel from "../Components/WeekendOffersCarousel";
 import Footer from "../Components/Footer";
 import Link from "next/link";
+import { useState } from "react";
+
 
 export default function Home() {
   const { data: session } = useSession();
+  
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
   return (
     <>
       <style jsx global>{`
@@ -91,8 +98,8 @@ export default function Home() {
       `}</style>
 
       {/* 🟦 CABECERA */}
-      <div className="navbar bg-blue-600 shadow-md px-6 w-full h-20">
-        <div className="flex-1">
+      <div className="navbar bg-blue-600 shadow-md px-6 w-full h-auto flex-wrap">
+        <div className="flex-1 flex items-center">
           <a className="btn btn-ghost text-xl text-white">
             <Image
               src="/Roomio.png"
@@ -101,16 +108,24 @@ export default function Home() {
               height={150}
               className="h-12 w-auto"
             />
-            <span className="ml-2">Alojamientos</span>
+            <span className="ml-2 hidden sm:inline">Alojamientos</span>
           </a>
         </div>
 
-        <div className="flex-none gap-4 flex items-center text-white font-semibold">
+        {/* Menú hamburguesa solo visible en móviles */}
+        <div className="block sm:hidden">
+          <button className="btn btn-ghost text-white" onClick={toggleMenu}>
+            ☰
+          </button>
+        </div>
+
+        {/* Menú completo para pantallas grandes */}
+        <div className="hidden sm:flex gap-4 items-center text-white font-semibold">
           {!session ? (
             <>
               <button
                 className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold"
-                onClick={() => window.location.href = "/register"}
+                onClick={() => (window.location.href = "/register")}
               >
                 Regístrate
               </button>
@@ -120,7 +135,11 @@ export default function Home() {
             </>
           ) : (
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost hover:bg-blue-700 flex items-center gap-2">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost hover:bg-blue-700 flex items-center gap-2"
+              >
                 <Image
                   src={session.user.image || "https://i.pravatar.cc/300"}
                   alt="Perfil"
@@ -128,7 +147,6 @@ export default function Home() {
                   height={32}
                   className="rounded-full"
                 />
-
                 <span>{session.user.name || session.user.email}</span>
               </div>
               <ul
@@ -138,11 +156,39 @@ export default function Home() {
                 <li><a>Mi cuenta</a></li>
                 <li><a>Reservas</a></li>
                 <li><a>Favoritos</a></li>
-                <li><button onClick={() => signOut({ callbackUrl: "/" })}>Cerrar sesión</button></li>
+                <li>
+                  <button onClick={() => signOut({ callbackUrl: "/" })}>
+                    Cerrar sesión
+                  </button>
+                </li>
               </ul>
             </div>
           )}
         </div>
+
+        {/* Menú desplegable en móviles */}
+        {menuOpen && (
+          <div className="w-full flex flex-col gap-2 mt-2 sm:hidden text-white font-semibold">
+            {!session ? (
+              <>
+                <button
+                  className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold w-full"
+                  onClick={() => (window.location.href = "/register")}
+                >
+                  Regístrate
+                </button>
+                <button className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold w-full">
+                  <Link href="/login">Iniciar sesión</Link>
+                </button>
+              </>
+            ) : (
+              <div className="flex flex-col gap-2 text-black bg-white p-4 rounded">
+                <p className="font-bold">{session.user.name || session.user.email}</p>
+                <button onClick={() => signOut({ callbackUrl: "/" })}>Cerrar sesión</button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
 
@@ -156,7 +202,7 @@ export default function Home() {
 
         {/* DESTINOS DE MODA */}
         <div className="p-10 bg-white">
-        <div className="container mx-auto max-w-8xl px-4 sm:px-6 md:px-10 lg:px-20 xl:px-48 destinos-container">
+          <div className="container mx-auto max-w-8xl px-4 sm:px-6 md:px-10 lg:px-20 xl:px-48 destinos-container">
 
             <h2 className="text-2xl font-bold mb-4 text-black">Destinos de moda</h2>
             <p className="text-gray-500 mb-8">Opciones más populares para quienes viajen desde México</p>
