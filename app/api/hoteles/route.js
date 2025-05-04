@@ -8,12 +8,13 @@ export async function GET(req) {
   const destino = url.searchParams.get("destino");
   const servicios = url.searchParams.get("servicios")?.split(",").filter(Boolean) || [];
   const tipos = url.searchParams.get("tipos")?.split(",").filter(Boolean) || [];
+  const orden = url.searchParams.get("orden") || "";
 
   const filtros = {};
 
   // Filtro por destino (case-insensitive)
   if (destino) {
-    filtros.destino = new RegExp(`^${destino}$`, "i"); // ← ahora es insensible a mayúsculas/minúsculas
+    filtros.destino = new RegExp(`^${destino}$`, "i");
   }
 
   // Filtro por servicios
@@ -24,6 +25,11 @@ export async function GET(req) {
   // Filtro por tipo de alojamiento
   if (tipos.length > 0) {
     filtros.tipoAlojamiento = { $in: tipos };
+  }
+
+  // Filtro por orden personalizado
+  if (orden) {
+    filtros.ordenar = orden;
   }
 
   try {

@@ -12,6 +12,12 @@ export default function HotelDetailPage() {
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   useEffect(() => {
     if (!id) return;
 
@@ -81,23 +87,25 @@ export default function HotelDetailPage() {
 
   return (
     <>
-      {/* CABECERA FIJA */}
-      <div className="navbar bg-blue-600 shadow-md px-6 h-20 flex justify-between items-center">
-
+      {/* ✅ CABECERA RESPONSIVA */}
+      <div className="navbar bg-blue-600 shadow-md px-6 w-full h-auto fixed top-0 left-0 z-50 flex flex-wrap justify-between items-center">
+        {/* Logo + título */}
         <div className="flex items-center">
           <Link href="/" className="flex items-center text-white no-underline">
-            <Image
-              src="/Roomio.png"
-              alt="Logo"
-              width={40}
-              height={40}
-              className="h-10 w-auto"
-            />
-            <span className="ml-2 text-xl font-semibold">Alojamientos</span>
+            <Image src="/Roomio.png" alt="Logo" width={40} height={40} className="h-10 w-auto" />
+            <span className="ml-2 text-xl font-semibold hidden sm:inline">Alojamientos</span>
           </Link>
         </div>
 
-        <div className="flex items-center gap-4 text-white font-semibold">
+        {/* Botón hamburguesa en móviles */}
+        <div className="block sm:hidden">
+          <button className="btn btn-ghost text-white" onClick={toggleMenu}>
+            ☰
+          </button>
+        </div>
+
+        {/* Menú en pantallas grandes */}
+        <div className="hidden sm:flex items-center gap-4 text-white font-semibold">
           {!session ? (
             <>
               <button
@@ -106,20 +114,13 @@ export default function HotelDetailPage() {
               >
                 Regístrate
               </button>
-              <Link
-                href="/login"
-                className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold"
-              >
+              <Link href="/login" className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold">
                 Iniciar sesión
               </Link>
             </>
           ) : (
             <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost hover:bg-blue-700 flex items-center gap-2"
-              >
+              <div tabIndex={0} role="button" className="btn btn-ghost hover:bg-blue-700 flex items-center gap-2">
                 <Image
                   src={session.user.image || "https://i.pravatar.cc/300"}
                   alt="Perfil"
@@ -129,22 +130,39 @@ export default function HotelDetailPage() {
                 />
                 <span>{session.user.name || session.user.email}</span>
               </div>
-              <ul
-                tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52 text-black"
-              >
+              <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52 text-black">
                 <li><a>Mi cuenta</a></li>
                 <li><a>Reservas</a></li>
                 <li><a>Favoritos</a></li>
-                <li>
-                  <button onClick={() => signOut({ callbackUrl: "/" })}>
-                    Cerrar sesión
-                  </button>
-                </li>
+                <li><button onClick={() => signOut({ callbackUrl: "/" })}>Cerrar sesión</button></li>
               </ul>
             </div>
           )}
         </div>
+
+        {/* Menú desplegable en móviles */}
+        {menuOpen && (
+          <div className="w-full flex flex-col gap-2 mt-2 sm:hidden text-white font-semibold">
+            {!session ? (
+              <>
+                <button
+                  className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold w-full"
+                  onClick={() => (window.location.href = "/register")}
+                >
+                  Regístrate
+                </button>
+                <Link href="/login" className="btn bg-white text-blue-700 hover:bg-gray-100 border-none font-semibold w-full">
+                  Iniciar sesión
+                </Link>
+              </>
+            ) : (
+              <div className="flex flex-col gap-2 text-black bg-white p-4 rounded">
+                <p className="font-bold">{session.user.name || session.user.email}</p>
+                <button onClick={() => signOut({ callbackUrl: "/" })}>Cerrar sesión</button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* CONTENIDO PRINCIPAL */}
