@@ -139,7 +139,7 @@ export default function MeridaPage() {
 
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6 mt-8">
-          <div className="hidden lg:flex flex-col gap-4 h-fit sticky top-24">
+            <div className="hidden lg:flex flex-col gap-4 h-fit sticky top-24">
 
               <iframe
                 title="Mapa Mérida"
@@ -154,10 +154,21 @@ export default function MeridaPage() {
                 <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-0">
                   Mérida: <span className="font-bold text-blue-700">{hoteles.length}</span> alojamientos encontrados
                 </h2>
-                <div className="flex gap-2">
-                  <button className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setVista("lista")}>Lista</button>
-                  <button className={`px-4 py-1 border rounded ${vista === "cuadricula" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setVista("cuadricula")}>Cuadrícula</button>
+                <div className="hidden md:flex gap-2">
+                  <button
+                    className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setVista("lista")}
+                  >
+                    Lista
+                  </button>
+                  <button
+                    className={`px-4 py-1 border rounded ${vista === "cuadricula" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setVista("cuadricula")}
+                  >
+                    Cuadrícula
+                  </button>
                 </div>
+
               </div>
               <HotelList hoteles={hoteles} vista={vista} />
             </section>

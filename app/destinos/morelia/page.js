@@ -117,7 +117,7 @@ export default function MoreliaPage() {
       </div>
 
 
-      
+
       <main className="min-h-screen bg-gray-100 pt-18">
         <BookingSearchForm />
 
@@ -159,10 +159,21 @@ export default function MoreliaPage() {
                 <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-0">
                   Morelia: <span className="font-bold text-blue-700">{hoteles.length}</span> alojamientos encontrados
                 </h2>
-                <div className="flex gap-2">
-                  <button className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setVista("lista")}>Lista</button>
-                  <button className={`px-4 py-1 border rounded ${vista === "cuadricula" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setVista("cuadricula")}>Cuadrícula</button>
+                <div className="hidden md:flex gap-2">
+                  <button
+                    className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setVista("lista")}
+                  >
+                    Lista
+                  </button>
+                  <button
+                    className={`px-4 py-1 border rounded ${vista === "cuadricula" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setVista("cuadricula")}
+                  >
+                    Cuadrícula
+                  </button>
                 </div>
+
               </div>
               <HotelList hoteles={hoteles} vista={vista} />
             </section>

@@ -66,7 +66,7 @@ export default function GuadalajaraPage() {
 
   return (
     <>
-     {/* ✅ CABECERA RESPONSIVA */}
+      {/* ✅ CABECERA RESPONSIVA */}
       <div className="navbar bg-blue-600 shadow-md px-6 w-full h-auto fixed top-0 left-0 z-50 flex flex-wrap justify-between items-center">
         <div className="flex items-center">
           <Link href="/" className="flex items-center text-white no-underline">
@@ -141,10 +141,21 @@ export default function GuadalajaraPage() {
             <section>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-0">Guadalajara: <span className="font-bold text-blue-700">{hoteles.length}</span> alojamientos encontrados</h2>
-                <div className="flex gap-2">
-                  <button className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setVista("lista")}>Lista</button>
-                  <button className={`px-4 py-1 border rounded ${vista === "cuadricula" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setVista("cuadricula")}>Cuadrícula</button>
+                <div className="hidden md:flex gap-2">
+                  <button
+                    className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setVista("lista")}
+                  >
+                    Lista
+                  </button>
+                  <button
+                    className={`px-4 py-1 border rounded ${vista === "cuadricula" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setVista("cuadricula")}
+                  >
+                    Cuadrícula
+                  </button>
                 </div>
+
               </div>
               <HotelList hoteles={hoteles} vista={vista} />
             </section>

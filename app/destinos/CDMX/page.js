@@ -124,7 +124,7 @@ export default function CiudadDeMexicoPage() {
           </div>
         )}
       </div>
-      
+
       <main className="min-h-screen bg-gray-100 pt-18">
         <BookingSearchForm />
 
@@ -163,7 +163,7 @@ export default function CiudadDeMexicoPage() {
             <div className="hidden lg:flex flex-col gap-4 h-fit sticky top-24">
               <iframe
                 title="Mapa Ciudad de México"
-                src="https://www.google.com/maps/embed?pb=!1m18!..."
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60259.99719985875!2d-99.19294945!3d19.4326076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92f9e88cd45%3A0x2d7d7637c6cb6e42!2sCiudad%20de%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1713133400000!5m2!1ses-419!2smx"
                 width="100%"
                 height="200"
                 style={{ border: 0 }}
@@ -179,7 +179,7 @@ export default function CiudadDeMexicoPage() {
                 <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-0">
                   Ciudad de México: <span className="font-bold text-blue-700">{hoteles.length}</span> alojamientos encontrados
                 </h2>
-                <div className="flex gap-2">
+                <div className="hidden md:flex gap-2">
                   <button
                     className={`px-4 py-1 border rounded ${vista === "lista" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
                     onClick={() => setVista("lista")}
@@ -193,6 +193,7 @@ export default function CiudadDeMexicoPage() {
                     Cuadrícula
                   </button>
                 </div>
+
               </div>
 
               <HotelList hoteles={hoteles} vista={vista} />
