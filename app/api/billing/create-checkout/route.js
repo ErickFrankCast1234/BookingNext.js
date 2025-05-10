@@ -5,11 +5,26 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
-    const { successUrl, cancelUrl, hotelId, roomType, price } = await req.json();
+    const {
+      successUrl,
+      cancelUrl,
+      hotelId,
+      roomType,
+      price,
+      fechaEntrada,
+      fechaSalida
+    } = await req.json();
 
     if (!successUrl || !cancelUrl || !hotelId || !roomType || !price) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    const descripcion = [
+      `Hotel ID:    ${hotelId}................................ `,
+      `                                             `,
+      `Fecha de Entrada: ${fechaEntrada}..................................................`,
+      `Fecha de Salida:  ${fechaSalida}..................................................`
+    ].join("     "); // Espacios entre campos para forzar salto visual en Stripe
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -19,9 +34,9 @@ export async function POST(req) {
             currency: "mxn",
             product_data: {
               name: `Reservación: ${roomType}`,
-              description: `Hotel ID: ${hotelId}`,
+              description: descripcion,
             },
-            unit_amount: price * 100, // Convertir a centavos
+            unit_amount: price * 100,
           },
           quantity: 1,
         },
@@ -29,6 +44,11 @@ export async function POST(req) {
       mode: "payment",
       success_url: successUrl,
       cancel_url: cancelUrl,
+      metadata: {
+        hotelId,
+        fechaEntrada,
+        fechaSalida,
+      },
     });
 
     return NextResponse.json({ url: session.url });

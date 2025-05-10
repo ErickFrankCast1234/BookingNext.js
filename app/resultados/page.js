@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import HotelFilterBar from "@/Components/HotelFilterSidebar";
 import { Filter, MapPin, SortAsc } from "lucide-react";
+import Footer from "@/Components/Footer";
+
 
 export default function Resultados({ searchParams }) {
   const { data: session } = useSession();
@@ -28,29 +30,29 @@ export default function Resultados({ searchParams }) {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   // ✅ FUNCIÓN GLOBAL Y REUTILIZABLE
-const fetchHoteles = async (filtrosActivos = filtros, ordenActual = orden) => {
-  const res = await fetch("/api/hoteles/buscar", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      destino,
-      fechaEntrada,
-      fechaSalida,
-      adultos,
-      ninos,
-      habitaciones,
-      filtros: filtrosActivos,
-      orden: ordenActual,
-    }),
-  });
-  const data = await res.json();
-  setHoteles(data);
-};
+  const fetchHoteles = async (filtrosActivos = filtros, ordenActual = orden) => {
+    const res = await fetch("/api/hoteles/buscar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        destino,
+        fechaEntrada,
+        fechaSalida,
+        adultos,
+        ninos,
+        habitaciones,
+        filtros: filtrosActivos,
+        orden: ordenActual,
+      }),
+    });
+    const data = await res.json();
+    setHoteles(data);
+  };
 
-// ✅ useEffect LIMPIO
-useEffect(() => {
-  fetchHoteles();
-}, [destino, fechaEntrada, fechaSalida, adultos, ninos, habitaciones, filtros, orden]);
+  // ✅ useEffect LIMPIO
+  useEffect(() => {
+    fetchHoteles();
+  }, [destino, fechaEntrada, fechaSalida, adultos, ninos, habitaciones, filtros, orden]);
 
 
   const toggleFiltro = (servicio) => {
@@ -73,15 +75,15 @@ useEffect(() => {
       ...(nuevosFiltros.servicios || []),
       ...(nuevosFiltros.tipos || [])
     ];
-  
+
     setFiltros(filtrosCombinados);
     fetchHoteles(filtrosCombinados, orden);
-  
+
     // Cierra el modal móvil si está abierto
     const filtrosModal = document.getElementById("filtros-modal");
     if (filtrosModal?.open) filtrosModal.close();
   };
-  
+
 
 
 
@@ -264,7 +266,13 @@ useEffect(() => {
                       <p><strong>Precio:</strong> ${hotel.precioNoche} MXN por noche</p>
                       <p><strong>Fechas:</strong> {fechaEntrada} – {fechaSalida}</p>
                       <p><strong>Habitaciones:</strong> {hotel.habitacionesDisponibles} | <strong>Adultos:</strong> {hotel.maxAdultos} | <strong>Niños:</strong> {hotel.maxNinos}</p>
-                      <button className="btn mt-2 bg-blue-600 text-white w-full md:w-auto">Mostrar precios</button>
+                      <Link
+                        href={`/hotel/${hotel._id}`}
+                        className="btn mt-2 bg-blue-600 text-white w-full md:w-auto text-center"
+                      >
+                        Mostrar precios
+                      </Link>
+
                     </div>
                   </div>
                 ))}
@@ -315,7 +323,8 @@ useEffect(() => {
           </form>
         </div>
       </dialog>
-
+      {/* ✅ FOOTER */}
+      <Footer />
     </div>
   );
 }

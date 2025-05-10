@@ -53,7 +53,10 @@ const nextConfig = {
       { protocol: "https", hostname: "cache.marriott.com" },
       { protocol: "https", hostname: "mbmarcobeteta.com" },
       { protocol: "https", hostname: "cdn0.bodas.com.mx" },
-      { protocol: "https", hostname: "escapadas.mexicodesconocido.com.mx" } // ← Agregado por el nuevo error
+      { protocol: "https", hostname: "escapadas.mexicodesconocido.com.mx" },
+      { protocol: "https", hostname: "www.momondo.mx" },
+      { protocol: "https", hostname: "x.cdrst.com" },
+      { protocol: "https", hostname: "static-resources-elementor.mirai.com" } // ← NUEVO agregado
     ]
   }
 };
